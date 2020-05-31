@@ -1,2 +1,2 @@
 #!/bin/sh
-npm install;
+/home/dami/.nvm/versions/node/v10.9.0/bin/npm install;

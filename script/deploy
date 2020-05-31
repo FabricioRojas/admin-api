@@ -1,2 +1,2 @@
 #!/bin/sh
-pm2 start index.js;
+/home/dami/.nvm/versions/node/v10.9.0/bin/pm2 start index.js;
