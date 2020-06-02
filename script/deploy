@@ -1,5 +1,5 @@
 #!/bin/sh
 #/home/dami/.nvm/versions/node/v10.9.0/bin/pm2 start index.js;
 echo "RESTARTING ALL"
-sudo pm2 status
+sudo /home/dami/.nvm/versions/node/v10.9.0/bin/pm2 status
 echo "ALL RESTARTED"
