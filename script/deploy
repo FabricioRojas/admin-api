@@ -1,3 +1,2 @@
 #!/bin/sh
-#/home/dami/.nvm/versions/node/v10.9.0/bin/pm2 start index.js;
 sudo /home/dami/.nvm/versions/node/v10.9.0/bin/pm2 restart /var/lib/jenkins/workspace/api/index.js
