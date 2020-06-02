@@ -1,3 +1,4 @@
 #!/bin/sh
+ifconfig
 ssh dami@192.168.0.23
 /home/dami/.nvm/versions/node/v10.9.0/bin/pm2 start index.js;
