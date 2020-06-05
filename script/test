@@ -1,2 +1,2 @@
 #!/bin/sh
-PORT=3002 ./node_modules/.bin/mocha --exit ./test/test.js;
+PORT=3001 ./node_modules/.bin/mocha --exit ./test/test.js;
