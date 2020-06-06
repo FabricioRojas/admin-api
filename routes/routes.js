@@ -9,5 +9,10 @@ module.exports = function (router) {
         res.send("Yep");
     });
 
-    router.post('/user', UserController.createUser);
+    //User CRUD
+    router.get('/users', UserController.list);
+    router.post('/user', UserController.create);
+    router.get('/user/:id', UserController.find);
+    router.put('/user/updatebyid', UserController.updateById);
+    router.delete('/user/delete', UserController.delete);
 }
