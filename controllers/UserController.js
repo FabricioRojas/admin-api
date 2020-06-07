@@ -32,7 +32,7 @@ exports.list = function (req, res) {
             res.status(200).send(response);
             return;
         }else{
-            res.status(204).send('No Data Found');
+            res.status(204).send('No users found');
         }
     });
 };
@@ -60,7 +60,7 @@ exports.create = function (req, res, next) {
 exports.find = function (req, res) {
     var params = req.params || {};
     var query = {
-        _id: params.id
+        username: params.username
     };
     if (!query) {
         res.status(400).send('Bad Request');
@@ -75,7 +75,7 @@ exports.find = function (req, res) {
             res.status(200).send(response);
             return;
         }else{
-            res.status(204).send('No Data Found');
+            res.status(204).send('No user found');
         }
     });
 };

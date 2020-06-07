@@ -10,7 +10,7 @@ module.exports = function (router) {
     //User CRUD
     router.post('/user', UserController.create)
     router.get('/users', middleware, UserController.list);
-    router.get('/user/:id', middleware, UserController.find);;
+    router.get('/user/:username', middleware, UserController.find);;
     router.put('/user/updatebyid', middleware, UserController.updateById);
     router.delete('/user/delete', middleware, UserController.delete);
 }
