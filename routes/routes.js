@@ -3,16 +3,14 @@ var UserController = require('../controllers/UserController');
 
 module.exports = function (router) {
 
-    router.get('/', function (req, res) { res.send("Hello world"); });
+    router.get('/', function (req, res) { res.send("Hello world"); })
 
-    router.get('/nope', middleware, function (req, res) {
-        res.send("Yep");
-    });
+    router.post('/login', UserController.login);
 
     //User CRUD
-    router.get('/users', UserController.list);
-    router.post('/user', UserController.create);
-    router.get('/user/:id', UserController.find);
-    router.put('/user/updatebyid', UserController.updateById);
-    router.delete('/user/delete', UserController.delete);
+    router.post('/user', UserController.create)
+    router.get('/users', middleware, UserController.list);
+    router.get('/user/:id', middleware, UserController.find);;
+    router.put('/user/updatebyid', middleware, UserController.updateById);
+    router.delete('/user/delete', middleware, UserController.delete);
 }

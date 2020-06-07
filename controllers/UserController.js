@@ -2,6 +2,26 @@ var UserService = require('../services/UserService');
 var bcrypt = require('bcrypt');
 
 
+exports.login = function (req, res) {
+    var user = req.body;
+    if (!user.username) {
+        res.status(400).send({ auth: false, message: 'Username is missing' });
+        return;
+    }
+    if (!user.password) {
+        res.status(400).send({ auth: false, message: 'Password is missing' });
+        return;
+    }
+
+    UserService.authenticate(user, function (error, response) {
+        if (response) {
+            res.status(201).send(response);
+        } else if (error) {
+            res.status(400).send(error);
+        }
+    });
+};
+
 exports.list = function (req, res) {
     UserService.listUsers(function (error, response) {
         if (error) {
@@ -11,8 +31,7 @@ exports.list = function (req, res) {
         if (response) {
             res.status(200).send(response);
             return;
-        }
-        if (!response) {
+        }else{
             res.status(204).send('No Data Found');
         }
     });
@@ -55,8 +74,7 @@ exports.find = function (req, res) {
         if (response) {
             res.status(200).send(response);
             return;
-        }
-        if (!response) {
+        }else{
             res.status(204).send('No Data Found');
         }
     });
