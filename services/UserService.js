@@ -6,22 +6,26 @@ var config = require('../config/config');
 
 exports.authenticate = function (user, callback) {
     User.findOne({username: user.username}).then((found) => {
-        bcrypt.compare(user.password, found.password, function(err, result) {
+        if(!found) return callback("User not found", null);
 
-            if(err) callback(error, null);
-            if(!result) callback(null, { auth: false, message: 'Failed to authenticate token.' });
+        bcrypt.compare(user.password, found.password, function(err, result) {
+            if(err) return callback(err, null);
+            if(!result) return callback(null, { auth: false, message: 'Failed to authenticate token.' });
 
             var token = jwt.sign({ id: found._id }, config.key, {
                 expiresIn: 86400
             });
-    
-            callback(null, { auth: true, token: token });
+
+            return callback(null, { auth: true, token: token });
         });
     })
 };
 
-exports.listUsers = function ( callback) {
-    User.find({}, {password: 0}, callback);
+exports.listUsers = function (callback) {
+    User.find({}, {password: 0}, function(err, found){
+        if(err) return callback(err, null);
+        return callback(null, found);
+    });
 };
 
 exports.createUser = function (data, callback) {

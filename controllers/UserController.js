@@ -16,23 +16,22 @@ exports.login = function (req, res) {
     UserService.authenticate(user, function (error, response) {
         if (response) {
             res.status(201).send(response);
+            return;
         } else if (error) {
             res.status(400).send(error);
+            return;
         }
     });
 };
 
 exports.list = function (req, res) {
     UserService.listUsers(function (error, response) {
-        if (error) {
-            res.status(404).send(error);
-            return;
-        }
         if (response) {
             res.status(200).send(response);
             return;
         }else{
             res.status(204).send('No users found');
+            return;
         }
     });
 };
@@ -62,10 +61,6 @@ exports.find = function (req, res) {
     var query = {
         username: params.username
     };
-    if (!query) {
-        res.status(400).send('Bad Request');
-        return;
-    }
     UserService.findUser(query, function (error, response) {
         if (error) {
             res.status(404).send(error);
@@ -126,7 +121,7 @@ exports.delete = function (req, res) {
 
 class User {
     constructor(userData) {
-        this.username = userData.username || '';
-        this.password = bcrypt.hashSync(userData.password, 8) || '';
+        this.username = userData.username ? userData.username : null;
+        this.password = userData.password ? bcrypt.hashSync(userData.password, 8) : null;
     }
 }
