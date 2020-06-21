@@ -1,2 +1,3 @@
 #!/bin/sh
-PORT=2999 ./node_modules/.bin/mocha --exit ./test/test.js;
+cp .env.test .env
+./node_modules/.bin/mocha --exit ./test/test.js;

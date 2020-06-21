@@ -30,7 +30,7 @@ exports.listUsers = function (callback) {
 
 exports.createUser = function (data, callback) {
     User.create(data).then((user) => {
-
+        
         var token = jwt.sign({ id: user._id }, config.key, {
             expiresIn: 86400
         });
