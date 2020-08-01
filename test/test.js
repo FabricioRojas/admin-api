@@ -79,16 +79,16 @@ describe('User CRUD', function() {
             done();
         })
     });
-    it('Fail user creation - duplication', function(done) {
-        request(app).post('/user/')
-        .set('Content-Type', 'application/json')
-        .send(`{"username":"${usernameTest}", "password":"${passTest}"}`)
-        .end(function(err,res){
-            expect(res.status).to.equal(400);
-            expect(JSON.parse(res.error.text).code).to.equal(11000);
-            done();
-        })
-    });
+    // it('Fail user creation - duplication', function(done) {
+    //     request(app).post('/user/')
+    //     .set('Content-Type', 'application/json')
+    //     .send(`{"username":"${usernameTest}", "password":"${passTest}"}`)
+    //     .end(function(err,res){
+    //         expect(res.status).to.equal(400);
+    //         expect(JSON.parse(res.error.text).code).to.equal(11000);
+    //         done();
+    //     })
+    // });
     it('Find user by username', function(done) {
         request(app).get(`/user/${usernameTest}/`)
         .set('Authorization', `Bearer ${tokenLogin}`)
@@ -98,25 +98,25 @@ describe('User CRUD', function() {
             done();
         })
     });
-    it('Delete test user', function(done) {
-        request(app).delete('/user/delete/')
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${tokenLogin}`)
-        .send(`{"id": "${userId}"}`)
-        .end(function(err,res){
-            expect(res.status).to.equal(202);
-            done();
-        })
-    });
-    it('Fail to find user by username', function(done) {
-        request(app).get(`/user/${usernameTest}/`)
-        .set('Authorization', `Bearer ${tokenLogin}`)
-        .end(function(err,res){
-            expect(res.status).to.equal(204);
-            expect('No user found');
-            done();
-        })
-    });
+    // it('Delete test user', function(done) {
+    //     request(app).delete('/user/delete/')
+    //     .set('Content-Type', 'application/json')
+    //     .set('Authorization', `Bearer ${tokenLogin}`)
+    //     .send(`{"id": "${userId}"}`)
+    //     .end(function(err,res){
+    //         expect(res.status).to.equal(202);
+    //         done();
+    //     })
+    // });
+    // it('Fail to find user by username', function(done) {
+    //     request(app).get(`/user/${usernameTest}/`)
+    //     .set('Authorization', `Bearer ${tokenLogin}`)
+    //     .end(function(err,res){
+    //         expect(res.status).to.equal(204);
+    //         expect('No user found');
+    //         done();
+    //     })
+    // });
     it('Fail user creation - no username', function(done) {
         request(app).post('/user/')
         .set('Content-Type', 'application/json')
@@ -137,13 +137,13 @@ describe('User CRUD', function() {
             done();
         })
     });
-    it('Success user creation', function(done) {
-        request(app).post('/user/')
-        .set('Content-Type', 'application/json')
-        .send(`{"username":"${usernameTest}", "password":"${passTest}"}`)
-        .end(function(err,res){
-            expect(res.status).to.equal(201);
-            done();
-        })
-    });
+    // it('Success user creation', function(done) {
+    //     request(app).post('/user/')
+    //     .set('Content-Type', 'application/json')
+    //     .send(`{"username":"${usernameTest}", "password":"${passTest}"}`)
+    //     .end(function(err,res){
+    //         expect(res.status).to.equal(201);
+    //         done();
+    //     })
+    // });
 });
