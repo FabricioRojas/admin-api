@@ -9,6 +9,18 @@ const UserSchema  = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String
+    },
+    rol: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role',
+        required: true,
     }
 })
 
