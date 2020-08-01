@@ -46,6 +46,10 @@ exports.create = function (req, res, next) {
         res.status(400).send('Password is missing');
         return;
     }
+    if (!body.firstname) {
+        res.status(400).send('Firstname is missing');
+        return;
+    }
 
     UserService.create(body, function (error, response) {
         if (response) {

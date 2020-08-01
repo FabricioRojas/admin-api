@@ -1,3 +1,4 @@
 #!/bin/sh
 cp .env.prod .env
-sudo /home/dami/.nvm/versions/node/v10.9.0/bin/pm2 restart api
+sudo pm2 start index.js --name api
+sudo pm2 restart api

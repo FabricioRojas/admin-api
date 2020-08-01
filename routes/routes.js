@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = function (router) {
-
+    
     router.get('/', function (req, res) { res.send(process.env.NODE_ENV == 'development' ? "Hello world" : "API v0.0.1"); });
     router.post('/login', UserController.login);
 
