@@ -25,7 +25,7 @@ exports.login = function (req, res) {
 };
 
 exports.list = function (req, res) {
-    UserService.listUsers(function (error, response) {
+    UserService.list(function (error, response) {
         if (response) {
             res.status(200).send(response);
             return;
@@ -47,7 +47,7 @@ exports.create = function (req, res, next) {
         return;
     }
 
-    UserService.createUser(body, function (error, response) {
+    UserService.create(body, function (error, response) {
         if (response) {
             res.status(201).send(response);
         } else if (error) {
@@ -61,7 +61,7 @@ exports.find = function (req, res) {
     var query = {
         username: params.username
     };
-    UserService.findUser(query, function (error, response) {
+    UserService.find(query, function (error, response) {
         if (error) {
             res.status(404).send(error);
             return;
@@ -83,7 +83,7 @@ exports.updateById = function (req, res) {
         return;
     }
     var updateData = body.data || {}
-    UserService.updateUserById(body.id, updateData, (err, response) => {
+    UserService.updateById(body.id, updateData, (err, response) => {
         if (response) {
             res.status(200).send(response);
         } else if (err) {
@@ -101,7 +101,7 @@ exports.delete = function (req, res) {
         res.status(400).send('Bad Request');
         return;
     }
-    UserService.deleteUser(query, function (error, response) {
+    UserService.delete(query, function (error, response) {
         if (error) {
             res.status(400).send(error);
             return;
@@ -123,5 +123,6 @@ class User {
     constructor(userData) {
         this.username = userData.username ? userData.username : null;
         this.password = userData.password ? bcrypt.hashSync(userData.password, 8) : null;
+        this.firstname = userData.firstname ? userData.firstname : null;
     }
 }

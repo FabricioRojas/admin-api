@@ -21,14 +21,14 @@ exports.authenticate = function (user, callback) {
     })
 };
 
-exports.listUsers = function (callback) {
+exports.list = function (callback) {
     User.find({}, {password: 0}, function(err, found){
         if(err) return callback(err, null);
         return callback(null, found);
     });
 };
 
-exports.createUser = function (data, callback) {
+exports.create = function (data, callback) {
     User.create(data).then((user) => {
         
         var token = jwt.sign({ id: user._id }, config.key, {
@@ -41,11 +41,11 @@ exports.createUser = function (data, callback) {
     });
 };
 
-exports.findUser = function (query, callback) {
+exports.find = function (query, callback) {
     User.findOne(query, {password: 0}, callback);
 };
 
-exports.updateUserById = function (id, data, callback) {
+exports.updateById = function (id, data, callback) {
     User.findByIdAndUpdate({
         _id: id
     }, data, (err, response) => {
@@ -53,6 +53,6 @@ exports.updateUserById = function (id, data, callback) {
     });
 }
 
-exports.deleteUser = function (query, callback) {
+exports.delete = function (query, callback) {
     User.deleteOne(query, callback);
 };
