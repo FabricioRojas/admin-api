@@ -50,7 +50,7 @@ exports.create = function (req, res, next) {
         res.status(400).send('Firstname is missing');
         return;
     }
-
+    
     UserService.create(body, function (error, response) {
         if (response) {
             res.status(201).send(response);
@@ -128,5 +128,6 @@ class User {
         this.username = userData.username ? userData.username : null;
         this.password = userData.password ? bcrypt.hashSync(userData.password, 8) : null;
         this.firstname = userData.firstname ? userData.firstname : null;
+        this.role = userData.role ? userData.role : "5f25ba45781bde1a1446db35";
     }
 }

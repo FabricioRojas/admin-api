@@ -6,6 +6,7 @@ var tokenLogin;
 var usernameTest = 'test@test.es';
 var passTest = '123456';
 var firstname = 'Testuser';
+var role = '5f25ba45781bde1a1446db35';
 
 describe('GET /', function () {
     it('Respond with Hello world', function () {
@@ -82,7 +83,7 @@ describe('User CRUD', function() {
     it('Fail user creation - duplication', function(done) {
         request(app).post('/user')
         .set('Content-Type', 'application/json')
-        .send(`{"username":"${usernameTest}", "password":"${passTest}", "firstname":"${firstname}"}`)
+        .send(`{"username":"${usernameTest}", "password":"${passTest}", "firstname":"${firstname}", "role":"${role}"}`)
         .end(function(err,res){
             expect(res.status).to.equal(400);
             expect(JSON.parse(res.error.text).code).to.equal(11000);
@@ -140,7 +141,7 @@ describe('User CRUD', function() {
     it('Success user creation', function(done) {
         request(app).post('/user')
         .set('Content-Type', 'application/json')
-        .send(`{"username":"${usernameTest}", "password":"${passTest}", "firstname":"${firstname}"}`)
+        .send(`{"username":"${usernameTest}", "password":"${passTest}", "firstname":"${firstname}", "role":"${role}"}`)
         .end(function(err,res){
             expect(res.status).to.equal(201);
             done();

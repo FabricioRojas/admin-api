@@ -16,13 +16,12 @@ const UserSchema  = new mongoose.Schema({
     },
     lastname: {
         type: String
+    },
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role',
+        required: true,
     }
-    // ,
-    // rol: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Role',
-    //     required: true,
-    // }
 })
 
 const User = mongoose.model('User', UserSchema);

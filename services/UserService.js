@@ -2,6 +2,7 @@ var bcrypt = require('bcrypt');
 var User = require('../models/User');
 var jwt = require('jsonwebtoken');
 var config = require('../config/config');
+var RoleService = require('.//RoleService');
 
 
 exports.authenticate = function (user, callback) {
@@ -12,11 +13,14 @@ exports.authenticate = function (user, callback) {
             if(err) return callback(err, null);
             if(!result) return callback(null, { auth: false, message: 'Failed to authenticate token.' });
 
-            var token = jwt.sign({ id: found._id }, config.key, {
-                expiresIn: 86400
+            RoleService.find({_id: found.role}, function (error, response) {
+                if(err) return callback(err, null);
+                if(!response) return callback(null, { auth: false, message: 'Failed to validate role.' });
+                var token = jwt.sign({ id: found._id, role : response.name }, config.key, {
+                    expiresIn: 86400
+                });
+                return callback(null, { auth: true, token: token });
             });
-
-            return callback(null, { auth: true, token: token });
         });
     })
 };
@@ -30,11 +34,6 @@ exports.list = function (callback) {
 
 exports.create = function (data, callback) {
     User.create(data).then((user) => {
-        
-        var token = jwt.sign({ id: user._id }, config.key, {
-            expiresIn: 86400
-        });
-
         callback(null, user);
     }, (error) => {
         callback(error, null);
